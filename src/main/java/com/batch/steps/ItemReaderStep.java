@@ -29,7 +29,7 @@ public class ItemReaderStep implements Tasklet {
 
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        log.info("-----------> Inicio del paso de lectura <-------------");
+        log.info("-----------> Inicio del paso de LECTURA <-------------");
         Reader reader = new FileReader(resourceLoader.getResource("claspath:files/destination/persons.csv").getFile());
         CSVParser parser = new CSVParserBuilder().
                 withSeparator(',')
@@ -55,6 +55,11 @@ public class ItemReaderStep implements Tasklet {
         reader.close();
 
         log.info("-----------> Fin del paso de lectura <-------------");
+        chunkContext.getStepContext()
+                .getStepExecution()
+                .getJobExecution()
+                .getExecutionContext()
+                .put("personList", personList);
         return RepeatStatus.FINISHED;
     }
 }
