@@ -25,15 +25,21 @@ public class ItemProcessorStep implements Tasklet {
                                                 .getExecutionContext()
                                                 .get("personList");
 
-        personList.stream().map(person -> {
+       List<Person> personFinalList = personList.stream().map(person -> {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss");
             person.setInsertionDay(format.format(LocalDateTime.now()));
+            return person;
         }).toList();
 
+       chunkContext.getStepContext()
+                    .getStepExecution()
+                    .getJobExecution()
+                    .getExecutionContext()
+                    .put("personList", personFinalList);
 
 
 
         log.info("-----------> Fin del paso de PROCESAMIENTO <-------------");
-        return null;
+        return RepeatStatus.FINISHED;
     }
 }
