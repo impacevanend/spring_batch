@@ -2,6 +2,7 @@ package com.batch.config;
 
 import com.batch.steps.ItemProcessorStep;
 import com.batch.steps.ItemReaderStep;
+import com.batch.steps.ItemWriterStep;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,5 +17,10 @@ public class BatchConfiguration {
     @Bean
     public ItemProcessorStep itemProcessorStep(){
         return new ItemProcessorStep();
+    }
+
+    @Bean
+    public ItemWriterStep itemWriterStep(){
+        return new ItemWriterStep();
     }
 }
