@@ -77,6 +77,8 @@ public class BatchConfiguration {
                 .build();
     }
 
+
+    @Bean
     public Job readCSVJob(){
         return jobBuilderFactory.get("readCSVJob")
                 .start(descompresFileStep())
