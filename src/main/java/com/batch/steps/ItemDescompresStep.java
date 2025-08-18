@@ -26,13 +26,13 @@ public class ItemDescompresStep implements Tasklet {
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
 
         log.info("-----------> Inicio del paso de DESCOMPRIMIR <-------------");
-        Resource resource = resourceLoader.getResource("claspath:files/person.zip");
+        Resource resource = resourceLoader.getResource("classpath:files/persons.zip");
         String filePath = resource.getFile().getAbsolutePath();
 
         ZipFile zipFile = new ZipFile(filePath);
         File destDir = new File(resource.getFile().getParent(), "destination");
 
-        if(destDir.exists()){
+        if(!destDir.exists()){
             destDir.mkdir();
         }
 

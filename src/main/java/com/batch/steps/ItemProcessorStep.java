@@ -26,10 +26,10 @@ public class ItemProcessorStep implements Tasklet {
                                                 .get("personList");
 
        List<Person> personFinalList = personList.stream().map(person -> {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             person.setInsertionDay(format.format(LocalDateTime.now()));
             return person;
-        }).toList();
+        }).collect(java.util.stream.Collectors.toList());
 
        chunkContext.getStepContext()
                     .getStepExecution()
